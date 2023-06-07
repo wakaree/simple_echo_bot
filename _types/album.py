@@ -43,7 +43,7 @@ class Album(BaseModel):
         if types:
             group = [
                 INPUT_TYPES[media_type](type=media_type, media=media.file_id)
-                for media_type in self.media_types
+                for media_type in types
                 for media in getattr(self, media_type)
             ]
             group[0].caption = self.caption
