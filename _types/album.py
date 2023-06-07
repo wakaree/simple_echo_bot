@@ -38,15 +38,13 @@ class Album(BaseModel):
         ]
 
     @property
-    def as_media_group(self) -> Optional[List[InputMedia]]:
-        types = self.media_types
-        if types:
-            group = [
-                INPUT_TYPES[media_type](type=media_type, media=media.file_id)
-                for media_type in self.media_types
-                for media in getattr(self, media_type)
-            ]
+    def as_media_group(self) -> List[InputMedia]:
+        group = [
+            INPUT_TYPES[media_type](type=media_type, media=media.file_id)
+            for media_type in self.media_types
+            for media in getattr(self, media_type)
+        ]
+        if group:
             group[0].caption = self.caption
 
-            return group
-        return None
+        return group
