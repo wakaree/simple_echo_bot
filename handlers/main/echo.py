@@ -1,21 +1,15 @@
-
-from typing import List, cast
-
 from aiogram import Router, F
 from aiogram.methods import CopyMessage, SendMediaGroup
 from aiogram.types import Message, ContentType
 
-from _types import Album, InputMedia
-
+from _types import Album
 
 router = Router(name=__name__)
 
 
 @router.message(F.media_group_id)
 async def echoAlbum(message: Message, album: Album) -> SendMediaGroup:
-    return message.answer_media_group(
-        cast(List[InputMedia], album.as_media_group)
-    )
+    return message.answer_media_group(album.as_media_group)
 
 
 @router.message(
