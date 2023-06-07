@@ -1,8 +1,9 @@
 
-from aiogram import Router
+from aiogram import Dispatcher
 
 from .album import AlbumMiddleware
 from .throttling import ThrottlingMiddleware
+
 
 __all__ = [
     "AlbumMiddleware",
@@ -11,9 +12,9 @@ __all__ = [
 ]
 
 
-def setup(router: Router) -> None:
+def setup(dp: Dispatcher) -> None:
     for m in [
-        ThrottlingMiddleware(),
-        AlbumMiddleware()
+        AlbumMiddleware(),
+        ThrottlingMiddleware()
     ]:
-        router.message.middleware(m)
+        dp.message.middleware(m)

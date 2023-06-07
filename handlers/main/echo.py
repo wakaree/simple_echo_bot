@@ -1,3 +1,4 @@
+
 from typing import List, cast
 
 from aiogram import Router, F
@@ -5,6 +6,7 @@ from aiogram.methods import CopyMessage, SendMediaGroup
 from aiogram.types import Message, ContentType
 
 from _types import Album, InputMedia
+
 
 router = Router(name=__name__)
 

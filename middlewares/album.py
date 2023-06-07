@@ -5,7 +5,7 @@ from typing import (
 )
 
 from aiogram import BaseMiddleware
-from aiogram.types import Message, TelegramObject
+from aiogram.types import Message
 from cachetools import TTLCache
 
 from _types import Album, Media
@@ -37,19 +37,23 @@ class AlbumMiddleware(BaseMiddleware):
             return message.document, "document"
         return None
 
-    async def __call__(
+    async def __call__(  # type: ignore[override]
         self,
-        handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
-        event: TelegramObject,
+        handler: Callable[[Message, Dict[str, Any]], Awaitable[Any]],
+        event: Message,
         data: Dict[str, Any]
     ) -> Any:
-        event = cast(Message, event)
         if event.media_group_id is not None:
             key = event.media_group_id
             media, content_type = cast(Tuple[Media, str], self.get_content(event))
 
             if key in self.cache:
-                return self.cache[key][content_type].append(media)
+                if content_type not in self.cache[key]:
+                    self.cache[key][content_type] = [media]
+                    return None
+
+                self.cache[key][content_type].append(media)
+                return None
 
             self.cache[key] = {content_type: [media], "caption": event.html_text}
             await sleep(self.latency)

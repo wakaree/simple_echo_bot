@@ -1,10 +1,10 @@
 
-from aiogram import Router
+from aiogram import Dispatcher
 
 
-def setup(router: Router) -> None:
-    from . import main
+def setup(dp: Dispatcher) -> None:
+    from handlers import main
 
-    router.include_routers(
+    dp.include_routers(
         main.router
     )
