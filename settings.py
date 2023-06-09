@@ -4,9 +4,10 @@ from typing import Union
 from pydantic import BaseModel, StrictStr
 from yaml import safe_load
 
+DEFAULT_PATH: str = "config.yml"
+
 
 class Settings(BaseModel):
-    DEFAULT_PATH: str = "config.yml"
     API_TOKEN: StrictStr
 
     def __init__(self, path: Union[Path, str] = DEFAULT_PATH) -> None:
