@@ -1,16 +1,23 @@
+from os import PathLike
 from pathlib import Path
-from typing import Dict, Any, Tuple, Callable
+from typing import Dict, Any, Tuple, Callable, cast, Union
 
 from pydantic import SecretStr, BaseSettings
 from yaml import full_load
 
 
 def _get_source(settings: BaseSettings) -> Dict[str, Any]:
-    config = settings.__config__
-    path = Path(config.env_file)
+    path = Path(
+        cast(
+            Union[str, PathLike[str]],
+            settings.__config__.env_file
+        )
+    )
 
-    with path.open(encoding=config.env_file_encoding) as stream:
-        return full_load(stream)
+    with path.open(
+        encoding=settings.__config__.env_file_encoding
+    ) as stream:
+        return cast(Dict[str, Any], full_load(stream))
 
 
 class Settings(BaseSettings):
