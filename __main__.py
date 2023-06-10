@@ -13,7 +13,7 @@ from utils import logger
 async def main() -> None:
     logger.setup()
     settings = Settings()
-    bot = Bot(settings.API_TOKEN, parse_mode=ParseMode.HTML)
+    bot = Bot(settings.API_TOKEN.get_secret_value(), parse_mode=ParseMode.HTML)
 
     dp = Dispatcher(name=__name__)
     middlewares.setup(dp)
