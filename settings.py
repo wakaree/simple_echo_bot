@@ -29,5 +29,5 @@ class Settings(BaseSettings):
         env_file_encoding = "utf-8"
 
         @classmethod
-        def customise_sources(cls, **_: Any) -> Tuple[SettingsSourceCallable, ...]:
+        def customise_sources(cls, **_: SettingsSourceCallable) -> Tuple[SettingsSourceCallable, ...]:
             return _get_source,
