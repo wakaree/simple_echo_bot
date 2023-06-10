@@ -1,8 +1,9 @@
 from os import PathLike
 from pathlib import Path
-from typing import Dict, Any, Tuple, Callable, cast, Union
+from typing import cast, Any, Dict, Tuple, Union
 
-from pydantic import SecretStr, BaseSettings
+from pydantic import BaseSettings, SecretStr
+from pydantic.env_settings import SettingsSourceCallable
 from yaml import full_load
 
 
@@ -28,5 +29,5 @@ class Settings(BaseSettings):
         env_file_encoding = "utf-8"
 
         @classmethod
-        def customise_sources(cls, **_: Any) -> Tuple[Callable[[BaseSettings], Dict[str, Any]]]:
+        def customise_sources(cls, **_: Any) -> Tuple[SettingsSourceCallable, ...]:
             return _get_source,
