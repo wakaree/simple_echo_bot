@@ -12,7 +12,7 @@ from utils import logger
 
 async def main() -> None:
     logger.setup()
-    settings = Settings()  # type: ignore[call-arg]
+    settings = Settings()
     bot = Bot(settings.API_TOKEN.get_secret_value(), parse_mode=ParseMode.HTML)
 
     dp = Dispatcher(name=__name__)
