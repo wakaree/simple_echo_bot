@@ -21,9 +21,7 @@ class AlbumMiddleware(BaseMiddleware):
         ttl: float = DEFAULT_TTL
     ) -> None:
         self.latency = latency
-        self.cache: MutableMapping[
-            str, Dict[str, Any]
-        ] = TTLCache(maxsize=10_000, ttl=ttl)
+        self.cache: MutableMapping[str, Dict[str, Any]] = TTLCache(maxsize=10_000, ttl=ttl)
 
     @staticmethod
     def get_content(message: Message) -> Optional[Tuple[Media, str]]:
