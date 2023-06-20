@@ -5,7 +5,7 @@ from aiogram.types import (
     PhotoSize, Video, Audio,
     Document, InputMediaPhoto,
     InputMediaVideo, InputMediaAudio,
-    InputMediaDocument
+    InputMediaDocument, Message
 )
 from pydantic import BaseModel
 
@@ -29,6 +29,7 @@ class Album(BaseModel):
     audio: Optional[List[Audio]] = None
     document: Optional[List[Document]] = None
     caption: Optional[str] = None
+    messages: List[Message]
 
     @property
     def media_types(self) -> List[str]:

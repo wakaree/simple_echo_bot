@@ -50,10 +50,16 @@ class AlbumMiddleware(BaseMiddleware):
                     self.cache[key][content_type] = [media]
                     return None
 
+                self.cache[key]["messages"].append(event)
                 self.cache[key][content_type].append(media)
                 return None
 
-            self.cache[key] = {content_type: [media], "caption": event.html_text}
+            self.cache[key] = {
+                content_type: [media],
+                "messages": [event],
+                "caption": event.html_text
+            }
+
             await sleep(self.latency)
             data["album"] = Album(**self.cache[key])
 
