@@ -10,7 +10,9 @@ from aiogram.types import (
     InputMediaVideo,
     InputMediaAudio,
     InputMediaDocument,
-    Message, TelegramObject, )
+    Message,
+    TelegramObject,
+)
 from pydantic import Field
 
 Media = Union[PhotoSize, Video, Audio, Document]

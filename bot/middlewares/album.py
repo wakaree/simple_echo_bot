@@ -13,10 +13,7 @@ class AlbumMiddleware(BaseMiddleware):
     DEFAULT_TTL = 0.2
 
     def __init__(
-        self,
-        album_key: str = "album",
-        latency: float = DEFAULT_LATENCY,
-        ttl: float = DEFAULT_TTL
+        self, album_key: str = "album", latency: float = DEFAULT_LATENCY, ttl: float = DEFAULT_TTL
     ) -> None:
         self.album_key = album_key
         self.latency = latency
@@ -61,8 +58,7 @@ class AlbumMiddleware(BaseMiddleware):
 
             await sleep(self.latency)
             data[self.album_key] = Album.model_validate(
-                self.cache[key],
-                context={"bot": data["bot"]}
+                self.cache[key], context={"bot": data["bot"]}
             )
 
         return await handler(event, data)
