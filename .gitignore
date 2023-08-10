@@ -1,3 +1,4 @@
 venv
 .mypy_cache
-logs.log
+.tests
+.idea

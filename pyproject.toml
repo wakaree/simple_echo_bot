@@ -1,0 +1,17 @@
+
+[tool.black]
+line_length = 99
+exclude = "\\.?venv|\\.?tests"
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]
+exclude = [
+    "\\.?venv",
+    "\\.idea",
+    "\\.tests?"
+]
+
+[[tool.mypy.overrides]]
+module = "bot.handlers.*"
+strict_optional = false
+warn_return_any = false
