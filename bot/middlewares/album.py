@@ -27,10 +27,7 @@ class AlbumMiddleware(BaseMiddleware):
     @classmethod
     def webhook_mode(cls, album_key: str = "album") -> AlbumMiddleware:
         """
-        Set up the middleware to be used with webhooks.
-        In fact, in most cases, simply increasing the delay is sufficient.
-
-        If during testing some elements of the media group are lost, just increase delay even more.
+        In case updates are processed in the background (by default in BaseRequestHandler), just increase the delay.
         """
         return cls(album_key=album_key, latency=1, ttl=2)
 
