@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from asyncio import sleep
 from typing import Any, Awaitable, Callable, Dict, MutableMapping, Optional, Tuple, cast
 
@@ -7,17 +9,30 @@ from cachetools import TTLCache
 
 from ..types import Album, Media
 
+DEFAULT_LATENCY = 0.2
+DEFAULT_TTL = 0.3
+
 
 class AlbumMiddleware(BaseMiddleware):
-    DEFAULT_LATENCY = 0.1
-    DEFAULT_TTL = 0.2
-
     def __init__(
-        self, album_key: str = "album", latency: float = DEFAULT_LATENCY, ttl: float = DEFAULT_TTL
+        self,
+        album_key: str = "album",
+        latency: float = DEFAULT_LATENCY,
+        ttl: float = DEFAULT_TTL,
     ) -> None:
         self.album_key = album_key
         self.latency = latency
         self.cache: MutableMapping[str, Dict[str, Any]] = TTLCache(maxsize=10_000, ttl=ttl)
+
+    @classmethod
+    def webhook_mode(cls, album_key: str = "album") -> AlbumMiddleware:
+        """
+        Set up the middleware to be used with webhooks.
+        In fact, in most cases, simply increasing the delay is sufficient.
+
+        If during testing some elements of the media group are lost, just increase delay even more.
+        """
+        return cls(album_key=album_key, latency=1, ttl=2)
 
     @staticmethod
     def get_content(message: Message) -> Optional[Tuple[Media, str]]:
