@@ -3,6 +3,27 @@
 line_length = 99
 exclude = "\\.?venv|\\.?tests"
 
+[tool.ruff]
+target-version = "py38"
+line-length = 99
+select = [
+    "C",
+    "DTZ",
+    "E",
+    "F",
+    "I",
+    "ICN",
+    "ISC",
+    "N",
+    "PLC",
+    "PLE",
+    "Q",
+    "S",
+    "T",
+    "W",
+    "YTT",
+]
+
 [tool.mypy]
 plugins = ["pydantic.mypy"]
 exclude = [

@@ -1,3 +1,3 @@
-from .album import Album, Media, InputMedia
+from .album import Album, InputMedia, Media
 
 __all__ = ["Album", "Media", "InputMedia"]

@@ -1,17 +1,17 @@
-from typing import List, Optional, Dict, Type, Union, cast
+from typing import Dict, List, Optional, Type, Union, cast
 
 from aiogram import Bot
 from aiogram.types import (
     Audio,
     Document,
-    PhotoSize,
-    Video,
-    InputMediaPhoto,
-    InputMediaVideo,
     InputMediaAudio,
     InputMediaDocument,
+    InputMediaPhoto,
+    InputMediaVideo,
     Message,
+    PhotoSize,
     TelegramObject,
+    Video,
 )
 from pydantic import Field
 

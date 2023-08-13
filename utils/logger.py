@@ -1,5 +1,4 @@
-from logging import basicConfig, INFO
-
+from logging import INFO, basicConfig
 
 __all__ = ["setup"]
 

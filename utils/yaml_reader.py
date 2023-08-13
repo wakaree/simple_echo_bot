@@ -7,8 +7,8 @@ from typing import Any, cast
 from pydantic.fields import FieldInfo
 from pydantic_settings import (
     BaseSettings,
-    SettingsConfigDict,
     PydanticBaseSettingsSource,
+    SettingsConfigDict,
 )
 from yaml import full_load
 

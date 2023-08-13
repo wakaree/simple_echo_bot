@@ -1,5 +1,5 @@
 from asyncio import sleep
-from typing import Any, Callable, Awaitable, MutableMapping, Tuple, Dict, Optional, cast
+from typing import Any, Awaitable, Callable, Dict, MutableMapping, Optional, Tuple, cast
 
 from aiogram import BaseMiddleware
 from aiogram.types import Message, TelegramObject
