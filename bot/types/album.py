@@ -1,6 +1,7 @@
 from typing import Dict, List, Optional, Type, Union, cast
 
 from aiogram import Bot
+from aiogram.methods import SendMediaGroup
 from aiogram.types import (
     Audio,
     Document,
@@ -13,6 +14,7 @@ from aiogram.types import (
     TelegramObject,
     Video,
 )
+from aiogram.types.base import UNSET_PROTECT_CONTENT
 from pydantic import Field
 
 Media = Union[PhotoSize, Video, Audio, Document]
@@ -49,3 +51,22 @@ class Album(TelegramObject):
         if group:
             group[0].caption = self.caption
         return group
+
+    def copy_to(
+        self,
+        chat_id: Union[int, str],
+        message_thread_id: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = UNSET_PROTECT_CONTENT,
+        reply_to_message_id: Optional[int] = None,
+        allow_sending_without_reply: Optional[bool] = None,
+    ) -> SendMediaGroup:
+        return SendMediaGroup(
+            chat_id=chat_id,
+            media=self.as_media_group,
+            message_thread_id=message_thread_id,
+            disable_notification=disable_notification,
+            protect_content=protect_content,
+            reply_to_message_id=reply_to_message_id,
+            allow_sending_without_reply=allow_sending_without_reply,
+        ).as_(self._bot)

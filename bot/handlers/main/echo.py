@@ -11,7 +11,7 @@ router = Router(name=__name__)
 
 @router.message(F.media_group_id)
 async def echo_album(message: Message, album: Album) -> TelegramMethod[Any]:
-    return message.answer_media_group(album.as_media_group)
+    return album.copy_to(chat_id=message.chat.id)
 
 
 @router.message()
