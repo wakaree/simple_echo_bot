@@ -27,7 +27,8 @@ class AlbumMiddleware(BaseMiddleware):
     @classmethod
     def webhook_mode(cls, album_key: str = "album") -> AlbumMiddleware:
         """
-        In case updates are processed in the background (by default in BaseRequestHandler), just increase the delay.
+        In case updates are processed in the background (by default in BaseRequestHandler),
+        just increase the delay.
         """
         return cls(album_key=album_key, latency=1, ttl=2)
 
