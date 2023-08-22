@@ -5,7 +5,7 @@ from aiogram.dispatcher.flags import get_flag
 from aiogram.types import TelegramObject, User
 from cachetools import TTLCache
 
-DEFAULT_RATE_LIMIT = 0.7
+DEFAULT_TTL = 0.7
 DEFAULT_KEY = "default"
 
 
@@ -28,7 +28,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         self,
         *,
         default_key: Optional[str] = DEFAULT_KEY,
-        default_ttl: float = 0.7,
+        default_ttl: float = DEFAULT_TTL,
         **ttl_map: float,
     ) -> None:
         """
