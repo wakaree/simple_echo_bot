@@ -12,10 +12,9 @@ DEFAULT_KEY = "default"
 class ThrottlingMiddleware(BaseMiddleware):
     """
     Simple throttling middleware using TTLCache
-    This is just an example and does not need to be combined with AlbumMiddleware
 
     Usage example:
-    router.message.middleware(ThrottlingMiddleware(spin=2.0))
+        router.message.middleware(ThrottlingMiddleware(spin=2.0))
 
     And then:
         @router.message(Command("dice"))
